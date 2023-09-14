@@ -5,6 +5,7 @@ def getAllCatalogObjects(itemType):
     counter = 0
     counter2 = 0
     allObjects = [] ##List of all CatalogObjects of itemType
+    
     client = Client(
         access_token=os.environ['SQUARE_ACCESS_TOKEN'],
         environment='production')
@@ -20,6 +21,7 @@ def getAllCatalogObjects(itemType):
         counter+=1
     elif result.is_error():
         print(result.errors)
+        
     while result.cursor != None:
         result = client.catalog.list_catalog(
             cursor = result.cursor,
@@ -35,4 +37,5 @@ def getAllCatalogObjects(itemType):
         elif result.is_error():
             print(result.errors)
             break
+            
     return allObjects
